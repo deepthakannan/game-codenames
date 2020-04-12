@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card {
+  height: 70px;
+  width: 70px;
+  border-radius: 5px;
+  border-width: 5px;
+  border: lightcoral;
+  padding: 5px;
+  margin: 5px;
+  background-color:pink;
+}
+
+.gameTileRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameBoard {
+  display: block;
+  align-items: center;
+}

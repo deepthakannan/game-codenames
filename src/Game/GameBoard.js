@@ -1,4 +1,5 @@
 import React from 'react';
+import WordCard from './WordCard';
 
 class GameBoard extends React.Component {
     constructor(props) {
@@ -9,7 +10,30 @@ class GameBoard extends React.Component {
     }
 
     render() {
-        return <p>GameBoard</p>;
+        console.log(this.props.wordCards);
+        return <div className="gameBoard">
+            <div className="gameTileRow">
+                {this.props.wordCards.slice(0, 5).map(card => <WordCard key={card.word} card={card} />)}
+            </div>
+            <div className="gameTileRow">
+            <div className="gameTileRow">
+                {this.props.wordCards.slice(5, 10).map(card => <WordCard key={card.word} card={card} />)}
+            </div>
+            </div>
+            <div className="gameTileRow">
+            <div className="gameTileRow">
+                {this.props.wordCards.slice(10, 15).map(card => <WordCard key={card.word} card={card} />)}
+            </div>
+            </div>
+            <div className="gameTileRow">
+            <div className="gameTileRow">
+                {this.props.wordCards.slice(15, 20).map(card => <WordCard key={card.word} card={card} />)}
+            </div>
+            </div>
+            <div className="gameTileRow">
+                {this.props.wordCards.slice(20, 25).map(card => <WordCard key={card.word} card={card} />)}
+            </div>
+        </div>;
     }
 }
 
