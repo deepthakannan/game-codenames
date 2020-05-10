@@ -13,11 +13,11 @@ code {
 }
 
 .card {
-  height: 70px;
-  width: 70px;
+  height: 80px;
+  width: 80px;
   border-radius: 5px;
   border-width: 5px;
-  border: lightcoral;
+  border: lightgreen;
   padding: 5px;
   margin: 5px;
   background-color:pink;

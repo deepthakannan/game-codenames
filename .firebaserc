@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "codenames-react-app",
+    "game-codenames": "codenames-react-app"
+  }
+}

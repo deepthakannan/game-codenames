@@ -1,5 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Hosting
+
+https://github.com/firebase/quickstart-js/blob/master/firestore/README.md
+https://www.youtube.com/watch?v=2Vf1D-rUMwE
+Firestore db https://console.firebase.google.com/project/codenames-react-app/database/firestore/data~2Fgame-sessions~2FzI4jTHUL3jlUrhFPvqP7
+https://stackoverflow.com/questions/46636255/firebase-firestore-is-not-a-function-when-trying-to-initialize-cloud-firestore
+https://firebase.google.com/docs/firestore/quickstart#web_2
+https://stackoverflow.com/questions/37652328/how-to-check-if-a-firebase-app-is-already-initialized-on-android
+
+
 ## Available Scripts
 
 In the project directory, you can run:
