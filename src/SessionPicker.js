@@ -1,10 +1,12 @@
 import React from 'react';
+import uuid from 'uuid';
+import { withRouter } from 'react-router-dom'
 
 class SessionPicker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            session: ''
+            sessionId: 'test'
         }
     }
 
@@ -17,10 +19,10 @@ class SessionPicker extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.onSessionSubmit(this.state.session);
+        this.props.history.push(`${this.state.sessionId}`)
     }
 
-    render(){
+    render() {
         return <div>
             {this.props.invalidSession && 
             <div>
@@ -28,7 +30,7 @@ class SessionPicker extends React.Component {
             </div>
             }
             <form onSubmit={this.onSubmit}>
-                <input type="text" onChange={this.onSessionTextChange} value={this.state.session} />
+                <input type="text" onChange={this.onSessionTextChange} value={this.state.sessionId} />
                 <input type="submit" />
             </form>
             
@@ -36,4 +38,4 @@ class SessionPicker extends React.Component {
     }
 }
 
-export default SessionPicker;
+export default withRouter(SessionPicker);

@@ -1,13 +1,13 @@
 import React from 'react';
 import GameBoard from './GameBoard'
 import Players from './Players'
-import SessionPicker from './SessionPicker'
 import Words from './words'
 import Card from './Card';
+import Player from './Player';
+import Store from './Store'
 
 class Game extends React.Component {
     static numberOfCards = 25;
-    
 
     constructor(props) {
         super(props);
@@ -20,25 +20,43 @@ class Game extends React.Component {
             red:"RED",
         };
         this.state = {
-            sessionName: props.sessionName ?? "Test",
-            wordCards: this.assembleWords(this.words.getRandom(Game.numberOfCards))
+            wordCards: [],
+            players: []
         };
     }
 
-    handleSessionSubmit = (sessionName) => {
-        this.setState({
-            sessionName: sessionName
-        })
+    async componentDidMount() {
+        this.store = new Store(this.props.sessionId, this.gameDataUpdateHandler);
+        const data = await this.store.get();
+        if(data == null) {
+            const words = this.assembleWords(this.words.getRandom(Game.numberOfCards));
+            await this.store.upsert(words, this.state.players);
+        } else {
+            this.updateStateFromRawData(data.cards, data.players);
+        }
     }
 
     render() {
-        if (this.state.sessionName) {
-            return <div>
-                        <GameBoard wordCards={this.state.wordCards} />
-                        <Players />
-                </div> 
-        }
-        return <SessionPicker onSessionSubmit={this.handleSessionSubmit} />
+        return <div>
+                    <GameBoard wordCards={this.state.wordCards} onReveal={this.reveal} />
+                    <Players players={this.state.players} />
+                </div>     
+    }
+
+    gameDataUpdateHandler = (wordCards, players) => {
+        this.updateStateFromRawData(wordCards, players);
+    }
+
+    updateStateFromRawData(wordCards, players) {
+        this.setState({
+            wordCards: wordCards.map(card => new Card(card.word, card.type, card.revealed)),
+            players: players.map(player => new Player(player.name))
+        });
+    }
+
+    reveal = (card) => {
+        card.reveal();
+        this.store.upsert(this.state.wordCards, this.state.players);
     }
 
     assembleWords(words) {
