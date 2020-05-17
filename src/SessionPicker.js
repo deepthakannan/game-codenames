@@ -12,7 +12,7 @@ class SessionPicker extends React.Component {
 
     onSessionTextChange = (e) => {
         this.setState({
-            session: e.target.value
+            sessionId: e.target.value
         });
         e.preventDefault();
     }
