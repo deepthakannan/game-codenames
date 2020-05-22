@@ -1,8 +1,9 @@
 import React from 'react';
 import WordCard from './WordCard';
 
-
-class GameBoard extends React.Component {
+type GameBoardProps = { wordCards: [], onReveal: (card: WordCard) => void };
+type GameBoardState = { sessionName: string }
+class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
     constructor(props) {
         super(props);
         this.state = {

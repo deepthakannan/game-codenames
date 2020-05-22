@@ -1,7 +1,11 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
+import Card from './Card';
+import Player from './Player';
 
 class Store {
+    docRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
+    updateHandler: (cards: Card[], players: Player[]) => void;
     constructor(sessionId, docUpdateHandler) {
         if (firebase.apps.length === 0) {
             firebase.initializeApp(this.getConfig());

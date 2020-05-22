@@ -1,6 +1,7 @@
 import React from 'react';
+import Card from './Card';
 
-class WordCard extends React.Component {
+class WordCard extends React.Component<{ card: Card, onReveal: (card: Card) => void }> {
     constructor(props) {
         super(props);
     }

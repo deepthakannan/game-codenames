@@ -1,6 +1,7 @@
 import React from 'react';
+import Player from './Player'
 
-class Players extends React.Component {
+class Players extends React.Component<{ players: Player[] }> {
     constructor(props) {
         super(props);
         this.state = {

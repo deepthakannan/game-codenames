@@ -2,7 +2,7 @@ import React from 'react';
 import uuid from 'uuid';
 import { withRouter } from 'react-router-dom'
 
-class SessionPicker extends React.Component {
+class SessionPicker extends React.Component<{history: any, invalidSession: boolean}, { sessionId: string }> {
     constructor(props) {
         super(props);
         this.state = {

@@ -6,8 +6,14 @@ import Card from './Card';
 import Player from './Player';
 import Store from './Store'
 
-class Game extends React.Component {
+type GameProps = { sessionId: string };
+type GameState = { wordCards: [], players: [] };
+
+class Game extends React.Component<GameProps, GameState> {
     static numberOfCards = 25;
+    words: Words;
+    types: { assasin: string; doubleAgent: string; bystanders: string; blue: string; red: string; };
+    store: Store;
 
     constructor(props) {
         super(props);
@@ -23,10 +29,11 @@ class Game extends React.Component {
             wordCards: [],
             players: []
         };
+        this.store = new Store(this.props.sessionId, this.gameDataUpdateHandler);
     }
 
     async componentDidMount() {
-        this.store = new Store(this.props.sessionId, this.gameDataUpdateHandler);
+        
         const data = await this.store.get();
         if(data == null) {
             const words = this.assembleWords(this.words.getRandom(Game.numberOfCards));
@@ -56,7 +63,7 @@ class Game extends React.Component {
 
     reveal = (card) => {
         card.reveal();
-        this.store.upsert(this.state.wordCards, this.state.players);
+        this.store!.upsert(this.state.wordCards, this.state.players);
     }
 
     assembleWords(words) {
