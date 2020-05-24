@@ -12,24 +12,72 @@ code {
     monospace;
 }
 
+.blue {
+  border-width: 1px;
+  border-color: #523ade;
+  background-image: url("./Assets/blue-agent.png");
+  background-size: cover;
+}
+
+.red {
+  border-width: 1px;
+  border-color:#e32929;
+  background-image: url("./Assets/red-agent.png");
+  background-size: cover;
+}
+
+.bystander {
+  border-width: 1px;
+  background-image: url("./Assets/bystander.png");
+  background-size: contain;
+}
+
+.assasin {
+  border-width: 1px;
+  background-image: url("./Assets/assasin.png");
+  background-size: cover;
+}
+
+.double-agent {
+  border-width: 1px;
+  background-image: url("./Assets/bystander.png");
+  background-size: cover;
+}
+
+.unrevealed {
+  border-color: #706e66;
+  border-width: 1px;
+  background-image: url("./Assets/unrevealed.jpg");
+  background-size: cover;
+}
+
 .card {
+  transform: skewX(-2deg);
+  display: flex;
+  flex-flow: column-reverse;
   height: 80px;
-  width: 80px;
+  background-color: #eddfa6;
+  min-width: 120px;
   border-radius: 5px;
-  border-width: 5px;
-  border: lightgreen;
+  border-style: solid;
   padding: 5px;
-  margin: 5px;
-  background-color:pink;
+  margin: 10px;
+}
+
+.word {
+  border-radius: 5px;
+  background-color:white;
+  text-transform: uppercase;
+  font-style: italic;
 }
 
 .gameTileRow {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
 }
 
 .gameBoard {
-  display: block;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }

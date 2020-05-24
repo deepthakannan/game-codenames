@@ -1,15 +1,20 @@
 import React from 'react';
-import Card from './Card';
+import { Card, CardType } from './Card';
+import classNames from 'classnames';
 
 class WordCard extends React.Component<{ card: Card, onReveal: (card: Card) => void }> {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
-        return <div className="card" onDoubleClick={this.onReveal}>
-            {this.props.card.revealed && this.props.card.type}
-            <div>{this.props.card.word}</div>
+        var cardClass = classNames({
+            'card': true,
+            [this.props.card.type.toLowerCase()]: this.props.card.revealed,
+            'unrevealed': !this.props.card.revealed
+        });
+
+        return <div className={cardClass} onDoubleClick={this.onReveal}>
+            {!this.props.card.revealed && <div className="word">
+                {this.props.card.word}
+            </div>}
         </div>;
     }
 

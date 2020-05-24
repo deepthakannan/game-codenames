@@ -1,5 +1,4 @@
 import React from 'react';
-import uuid from 'uuid';
 import { withRouter } from 'react-router-dom'
 
 class SessionPicker extends React.Component<{history: any, invalidSession: boolean}, { sessionId: string }> {

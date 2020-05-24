@@ -2,7 +2,7 @@ import React from 'react';
 import GameBoard from './GameBoard'
 import Players from './Players'
 import Words from './words'
-import Card from './Card';
+import { Card, CardType } from './Card';
 import Player from './Player';
 import Store from './Store'
 
@@ -68,22 +68,17 @@ class Game extends React.Component<GameProps, GameState> {
 
     assembleWords(words) {
         console.log(words);
-        const wordCards = [ new Card(words[0], this.types.assasin), new Card(words[1], this.types.doubleAgent) ];
+        const wordCards = [ new Card(words[0], CardType.Assasin), new Card(words[1], CardType.DoubleAgent) ];
         words.slice(2, 9).forEach(word => {
-            wordCards.push(new Card(word, this.types.bystanders));
+            wordCards.push(new Card(word, CardType.Bystander));
         });
         words.slice(9, 17).forEach(word => {
-            wordCards.push(new Card(word, this.types.red));
+            wordCards.push(new Card(word, CardType.Red));
         });
         words.slice(17, 25).forEach(word => {
-            wordCards.push(new Card(word, this.types.blue));
+            wordCards.push(new Card(word, CardType.Blue));
         });
-        this.shuffle(wordCards);
         return wordCards;
-    }
-
-    shuffle(array) {
-        array.sort(() => Math.random() - 0.5);
     }
 }
 

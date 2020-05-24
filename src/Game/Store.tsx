@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
-import Card from './Card';
+import { Card } from './Card';
 import Player from './Player';
 
 class Store {
