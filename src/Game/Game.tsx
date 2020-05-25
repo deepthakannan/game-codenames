@@ -1,10 +1,14 @@
 import React from 'react';
 import GameBoard from './GameBoard'
-import Players from './Players'
+import Players from '../Profile/Players'
 import Words from './words'
 import { Card, CardType } from './Card';
-import Player from './Player';
+import { Player, Team } from '../Profile/Player';
 import Store from './Store'
+import Dialog from '@material-ui/core/Dialog';
+import { DialogTitle, TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+import ProfileEditor from '../Profile/ProfileEditor';
+import ProfileStore from '../Profile/ProfileStore';
 
 type GameProps = { sessionId: string };
 type GameState = { wordCards: [], players: [] };
@@ -12,19 +16,11 @@ type GameState = { wordCards: [], players: [] };
 class Game extends React.Component<GameProps, GameState> {
     static numberOfCards = 25;
     words: Words;
-    types: { assasin: string; doubleAgent: string; bystanders: string; blue: string; red: string; };
     store: Store;
 
     constructor(props) {
         super(props);
         this.words = new Words();
-        this.types = {
-            assasin: "ASSASSIN",
-            doubleAgent:"DOUBLE AGENT",
-            bystanders:"BYSTANDER",
-            blue:"BLUE",
-            red:"RED",
-        };
         this.state = {
             wordCards: [],
             players: []
@@ -33,7 +29,6 @@ class Game extends React.Component<GameProps, GameState> {
     }
 
     async componentDidMount() {
-        
         const data = await this.store.get();
         if(data == null) {
             const words = this.assembleWords(this.words.getRandom(Game.numberOfCards));
@@ -43,21 +38,35 @@ class Game extends React.Component<GameProps, GameState> {
         }
     }
 
+    handleSave = (player: Player) => {
+        this.store.addPlayer(player);
+    }
+
     render() {
-        return <div>
+        const isPlayerInfoNeeded = !ProfileStore.readPlayerFromLocalStorage();
+        if (isPlayerInfoNeeded) {
+            return <Dialog open={isPlayerInfoNeeded}>
+                <DialogTitle id="simple-dialog-title">User Info</DialogTitle>
+                <ProfileEditor onSaveSuccess={this.handleSave} />
+            </Dialog>
+
+        } else {
+            return <div>
                     <GameBoard wordCards={this.state.wordCards} onReveal={this.reveal} />
                     <Players players={this.state.players} />
                 </div>     
+        }
+        
     }
 
-    gameDataUpdateHandler = (wordCards, players) => {
+    gameDataUpdateHandler = (wordCards: any, players: any) => {
         this.updateStateFromRawData(wordCards, players);
     }
 
     updateStateFromRawData(wordCards, players) {
         this.setState({
             wordCards: wordCards.map(card => new Card(card.word, card.type, card.revealed)),
-            players: players.map(player => new Player(player.name))
+            players: players.map(player => new Player(player.name, player.team))
         });
     }
 

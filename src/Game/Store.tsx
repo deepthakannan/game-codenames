@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import { Card } from './Card';
-import Player from './Player';
+import { Player } from '../Profile/Player';
 
 class Store {
     docRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
@@ -22,7 +22,7 @@ class Store {
     }
 
     upsert = async (cards, players) => {
-        const data = { cards: cards.map(card => ({...card})), players: players.map(player => ({...player})) };
+        const data = { cards: cards.map(this.cardJSON), players: players.map(this.playerJSON) };
         if (await this.get() == null) {
             await this.docRef.set(data);
             this.docRef.onSnapshot((doc) => this.onDocumentUpdate(doc));
@@ -31,9 +31,29 @@ class Store {
         }
     }
 
+    addPlayer = async (player: Player) => {
+        this.docRef.update({
+            players: firebase.firestore.FieldValue.arrayUnion(this.playerJSON(player))
+        });
+    }
+
+    removePlayer = async (player: Player) => {
+        this.docRef.update({
+            players: firebase.firestore.FieldValue.arrayRemove(this.playerJSON(player))
+        });
+    }
+
     onDocumentUpdate = (doc) => {
         const data = doc.data();
         this.updateHandler(data?.cards || [], data?.players || []);
+    }
+
+    private playerJSON(player: Player): any {
+        return { ...player };
+    }
+
+    private cardJSON(card: Card): any {
+        return { ...card };
     }
 
     getConfig() {
