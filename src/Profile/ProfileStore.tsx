@@ -1,5 +1,5 @@
 import { Card } from "../Game/Card";
-import { Player, Team } from "./Player";
+import { PlayerData, Team } from "./Player";
 
 export default class ProfileStore {
     static teamKey: string = "team";

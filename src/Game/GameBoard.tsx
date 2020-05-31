@@ -12,7 +12,6 @@ class GameBoard extends React.Component<GameBoardProps, GameBoardState> {
     }
 
     render() {
-        console.log(this.props.wordCards);
         return <div className="gameBoard">
             <div className="gameTileRow">
                 {this.props.wordCards.slice(0, 5).map(card => this.createCard(card))}

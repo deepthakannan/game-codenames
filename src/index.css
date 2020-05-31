@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #222227;
+  background-image: url("./Assets/board.jpg");
+  background-repeat: round;
 }
 
 code {
@@ -12,18 +15,27 @@ code {
     monospace;
 }
 
+.game-title {
+  color: #675553;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #C0C2CE;
+  opacity: 0.4;
+}
+
 .blue {
   border-width: 1px;
-  border-color: #523ade;
+  border-color: #3C80B2;
   background-image: url("./Assets/blue-agent.png");
   background-size: cover;
+  box-shadow:  -1px 1px rgb(96, 186, 250)
 }
 
 .red {
   border-width: 1px;
-  border-color:#e32929;
+  border-color:#981016;
   background-image: url("./Assets/red-agent.png");
   background-size: cover;
+  box-shadow:  -1px 1px #981016
 }
 
 .bystander {
@@ -49,6 +61,8 @@ code {
   border-width: 1px;
   background-image: url("./Assets/unrevealed.jpg");
   background-size: cover;
+  box-shadow:  -1px 1px lightyellow
+  
 }
 
 .card {
@@ -66,7 +80,7 @@ code {
 
 .word {
   border-radius: 5px;
-  background-color:white;
+  background-color:#DFDFDF;
   text-transform: uppercase;
   font-style: italic;
 }

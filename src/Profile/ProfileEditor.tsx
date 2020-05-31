@@ -1,5 +1,5 @@
 import React from 'react';
-import { Player, Team } from './Player'
+import { PlayerData, Team } from './PlayerData'
 import { FormControl, TextField, FormLabel, RadioGroup, FormControlLabel, Radio, Button } from '@material-ui/core';
 import ProfileStore from './ProfileStore';
 
@@ -13,7 +13,7 @@ type ProfileEditorStateType = {
 };
 
 type ProfileEditorPropType = {
-    onSaveSuccess: (player: Player) => void;
+    onSaveSuccess: (player: PlayerData) => void;
 };
 
 class ProfileEditor extends React.Component<ProfileEditorPropType, ProfileEditorStateType> {
@@ -44,7 +44,7 @@ class ProfileEditor extends React.Component<ProfileEditorPropType, ProfileEditor
 
     onSave = () => {
         ProfileStore.storePlayerInLocalStorage(this.state.name, this.state.team);
-        this.props.onSaveSuccess(new Player(this.state.name, this.state.team));
+        this.props.onSaveSuccess(new PlayerData(this.state.name, this.state.team));
     }
 
     render() {

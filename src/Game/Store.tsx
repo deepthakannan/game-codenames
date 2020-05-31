@@ -1,11 +1,11 @@
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import { Card } from './Card';
-import { Player } from '../Profile/Player';
+import { PlayerData } from '../Profile/Player';
 
 class Store {
     docRef: firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
-    updateHandler: (cards: Card[], players: Player[]) => void;
+    updateHandler: (cards: Card[], players: PlayerData[]) => void;
     constructor(sessionId, docUpdateHandler) {
         if (firebase.apps.length === 0) {
             firebase.initializeApp(this.getConfig());
@@ -31,13 +31,13 @@ class Store {
         }
     }
 
-    addPlayer = async (player: Player) => {
+    addPlayer = async (player: PlayerData) => {
         this.docRef.update({
             players: firebase.firestore.FieldValue.arrayUnion(this.playerJSON(player))
         });
     }
 
-    removePlayer = async (player: Player) => {
+    removePlayer = async (player: PlayerData) => {
         this.docRef.update({
             players: firebase.firestore.FieldValue.arrayRemove(this.playerJSON(player))
         });
@@ -48,7 +48,7 @@ class Store {
         this.updateHandler(data?.cards || [], data?.players || []);
     }
 
-    private playerJSON(player: Player): any {
+    private playerJSON(player: PlayerData): any {
         return { ...player };
     }
 
